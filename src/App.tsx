@@ -1,7 +1,13 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
+import Sidebar from "./components/Sidebar";
 
 function App() {
-    return <Box>Hello world!</Box>;
+  return (
+    <Flex>
+      <Sidebar />
+      <Box>Content</Box>
+    </Flex>
+  );
 }
 
 export default App;
