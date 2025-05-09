@@ -1,8 +1,10 @@
 import type { Complement } from "@/model/complement.ts";
 
-export type EnergyType = "electricity" | "gas";
+type EnergyType = "electricity" | "gas";
 
-export interface Contract {
+export type Contract = ElectricityContract | GasContract;
+
+interface AbstractContract {
   energyType: EnergyType;
   company: string;
 
@@ -14,14 +16,14 @@ export interface Contract {
   complements: Complement[];
 }
 
-export interface ElectricityContract extends Contract {
+export interface ElectricityContract extends AbstractContract {
   energyType: "electricity";
 
   peakPowerRate: number;
   valleyPowerRate: number;
 }
 
-export interface GasContract extends Contract {
+export interface GasContract extends AbstractContract {
   energyType: "gas";
 
   powerRate: number;
