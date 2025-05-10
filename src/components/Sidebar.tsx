@@ -1,55 +1,33 @@
-import { Box, Button, Heading, HStack, SegmentGroup, Spacer, Stack } from "@chakra-ui/react";
-import { Calculator, CirclePlus, Gauge, Handshake, Settings2, Zap } from "lucide-react";
-
-const menuItems = [
-  {
-    value: "consumption",
-    label: (
-      <HStack w="100%" justify="flex-start">
-        <Gauge /> Consumption
-      </HStack>
-    ),
-  },
-  {
-    value: "simulator",
-    label: (
-      <HStack w="100%" justify="flex-start">
-        <Calculator /> Simulator
-      </HStack>
-    ),
-  },
-];
+import { Box, Button, ButtonGroup, Heading, HStack, Spacer, Stack } from "@chakra-ui/react";
+import { Settings2, Zap } from "lucide-react";
+import { useLocation } from "wouter";
+import { routes } from "@/routes.ts";
 
 const Sidebar = () => {
+  const [location, navigate] = useLocation();
+
   return (
     <Box background={"bg.subtle"}>
       <Stack minH={"100dvh"} minW={200} p={3}>
-        <HStack p={4}>
+        <HStack p={4} onClick={() => navigate("/")}>
           <Zap />
           <Heading>Kilovatto</Heading>
         </HStack>
 
-        <Button justifyContent="start">
-          <CirclePlus /> Add
-        </Button>
-        <Button variant="surface" justifyContent="start">
-          <Gauge /> Consumption
-        </Button>
-        <Button variant="surface" justifyContent="start">
-          <Calculator /> Simulator
-        </Button>
-        <Button variant="surface" justifyContent="start">
-          <Handshake /> Contracts
-        </Button>
-
-        <SegmentGroup.Root
-          defaultValue="consumption"
-          orientation="vertical"
-          style={{ width: "100%" }}
-        >
-          <SegmentGroup.Indicator />
-          <SegmentGroup.Items items={menuItems} />
-        </SegmentGroup.Root>
+        <ButtonGroup orientation="vertical">
+          {routes.map(({ path, icon: Icon, label }) => (
+            <Button
+              key={path}
+              justifyContent="start"
+              variant={location === path ? "solid" : "surface"}
+              onClick={() => navigate(path)}
+              w={"100%"}
+            >
+              <Icon />
+              {label}
+            </Button>
+          ))}
+        </ButtonGroup>
 
         <Spacer />
 
