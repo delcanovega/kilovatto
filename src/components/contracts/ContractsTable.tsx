@@ -30,10 +30,10 @@ const ContractsTable = (props: ContractsTableProps) => {
         <SegmentGroup.Indicator />
         <SegmentGroup.Items items={["all", "electricity", "gas"]} />
       </SegmentGroup.Root>
-      <Table.Root size="sm" variant="outline">
+      <Table.Root size="sm" variant="outline" interactive={true}>
         <Table.Header>
           <Table.Row>
-            <Table.ColumnHeader>Type</Table.ColumnHeader>
+            <Table.ColumnHeader minW={81}>Type</Table.ColumnHeader>
             <Table.ColumnHeader>Company</Table.ColumnHeader>
             <Table.ColumnHeader>From</Table.ColumnHeader>
             <Table.ColumnHeader>To</Table.ColumnHeader>
@@ -42,7 +42,7 @@ const ContractsTable = (props: ContractsTableProps) => {
         </Table.Header>
         <Table.Body>
           {filteredRows.map((contract) => (
-            <Table.Row>
+            <Table.Row onClick={() => props.selectContract(contract)}>
               <Table.Cell>{contract.energyType}</Table.Cell>
               <Table.Cell>{contract.company}</Table.Cell>
               <Table.Cell>{formatDate(contract.from)}</Table.Cell>
