@@ -1,4 +1,4 @@
-import { Box, Flex, VStack } from "@chakra-ui/react";
+import { Box, Flex, Separator, VStack } from "@chakra-ui/react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header.tsx";
 import { Route, Switch, useLocation } from "wouter";
@@ -12,6 +12,7 @@ function App() {
       <Box flex={"1"} w={"100%"}>
         <VStack>
           <Header />
+          <Separator w={"100%"} />
           <Switch>
             <Route path="/" component={() => <NavigateTo path="/consumption" />} />
             {routes.map((route) => (

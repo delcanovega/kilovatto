@@ -1,7 +1,8 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, HStack, Separator } from "@chakra-ui/react";
 import { useLocation } from "wouter";
 import { useMemo } from "react";
 import { routes } from "@/routes.ts";
+import { PanelLeftClose } from "lucide-react";
 
 const Header = () => {
   const [location] = useLocation();
@@ -11,8 +12,14 @@ const Header = () => {
   }, [location]);
 
   return (
-    <Box w={"100%"} minH={20} background={"bg.emphasized"}>
-      <Heading>{title}</Heading>
+    <Box w={"100%"} minH={18} paddingX={2} paddingTop={2} display={"flex"} alignItems={"center"}>
+      <HStack>
+        <Button variant={"ghost"}>
+          <PanelLeftClose />
+        </Button>
+        <Separator orientation={"vertical"} h={50} />
+        <Heading paddingLeft={4}>{title}</Heading>
+      </HStack>
     </Box>
   );
 };
